@@ -9,12 +9,12 @@ using namespace cv;
 
 int main(int, char**)
 {
-	cv::VideoCapture cap(0); // ƒfƒtƒHƒ‹ƒgƒJƒƒ‰‚ğƒI[ƒvƒ“
-	if (!cap.isOpened())  // ¬Œ÷‚µ‚½‚©‚Ç‚¤‚©‚ğƒ`ƒFƒbƒN
+	cv::VideoCapture cap(0); // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚«ãƒ¡ãƒ©ã‚’ã‚ªãƒ¼ãƒ—ãƒ³
+	if (!cap.isOpened())  // æˆåŠŸã—ãŸã‹ã©ã†ã‹ã‚’ãƒã‚§ãƒƒã‚¯
 		return -1;
 	cv::namedWindow("window1", 1);
 
-	// •ª—ŞŠí‚Ì“Ç‚İ‚İ
+	// åˆ†é¡å™¨ã®èª­ã¿è¾¼ã¿
 	std::string cascadeName = "C:/Program Files/OpenCV/sources/data/haarcascades/haarcascade_frontalface_default.xml";
 	cv::CascadeClassifier cascade;
 	if (!cascade.load(cascadeName))
@@ -27,18 +27,18 @@ int main(int, char**)
 		cv::Mat frame;
 		cv::Mat input_image;
 		cv::Mat output_image;
-		cap >> frame; // ƒJƒƒ‰‚©‚çV‚µ‚¢ƒtƒŒ[ƒ€‚ğæ“¾
-		cvtColor(frame, input_image, CV_BGR2GRAY);//ŠçŒŸo‚ÍƒOƒŒ[‚Åok
+		cap >> frame; // ã‚«ãƒ¡ãƒ©ã‹ã‚‰æ–°ã—ã„ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å–å¾—
+		cvtColor(frame, input_image, CV_BGR2GRAY);//é¡”æ¤œå‡ºã¯ã‚°ãƒ¬ãƒ¼ã§ok
 		cv::equalizeHist(input_image, input_image);
-		output_image = frame;     //output‚ÍƒJƒ‰[‚ÅD
+		output_image = frame;     //outputã¯ã‚«ãƒ©ãƒ¼ã§ï¼
 
-		//(‰æ‘œ,o—Í’ZŒ`,k¬ƒXƒP[ƒ‹,Å’á’ZŒ`”,ƒtƒ‰ƒOH,Å¬’ZŒ`)
+		//(ç”»åƒ,å‡ºåŠ›çŸ­å½¢,ç¸®å°ã‚¹ã‚±ãƒ¼ãƒ«,æœ€ä½çŸ­å½¢æ•°,ãƒ•ãƒ©ã‚°ï¼Ÿ,æœ€å°çŸ­å½¢)
 		cascade.detectMultiScale(input_image, faces,
 			1.3, 2,
 			CV_HAAR_SCALE_IMAGE,
 			cv::Size(50, 50));
 
-		// Œ‹‰Ê‚Ì•`‰æ
+		// çµæœã®æç”»
 		std::vector<cv::Rect>::const_iterator r = faces.begin();
 		for (; r != faces.end(); ++r) {
 			cv::Point center;
@@ -50,13 +50,13 @@ int main(int, char**)
 
 			printf("faceID%d,x=%d,y=%d,width=%d,height=%d\n", r, r->x, r->y, r->width, r->height); 
 		}
-		//‹¾‚É‚·‚é‚½‚ß”½“]‚³‚¹‚é
+		//é¡ã«ã™ã‚‹ãŸã‚åè»¢ã•ã›ã‚‹
 		flip(output_image, output_image, 1);
 		imshow("window1", output_image);
 
 		if (cv::waitKey(27) >= 0) break;
 
 	}
-	// VideoCapture ƒfƒXƒgƒ‰ƒNƒ^‚É‚æ‚èCƒJƒƒ‰‚Í©“®“I‚ÉI—¹ˆ—‚³‚ê‚Ü‚·
+	// VideoCapture ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã«ã‚ˆã‚Šï¼Œã‚«ãƒ¡ãƒ©ã¯è‡ªå‹•çš„ã«çµ‚äº†å‡¦ç†ã•ã‚Œã¾ã™
 	return 0;
 }

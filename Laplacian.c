@@ -8,7 +8,7 @@ int
 main(int argc, char **argv)
 {
 	// (1)load a specified file as a grayscale image
-	const char *imagename = argc > 1 ? argv[1] : "sekoguti.jpg";
+	const char *imagename = argc > 1 ? argv[1] : "image.jpg";
 	Mat src_img = imread(imagename, 0);
 	if (!src_img.data)
 		return -1;

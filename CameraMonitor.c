@@ -3,21 +3,21 @@
 
 using namespace cv;
 
-int main(int argc, char *argv[])
-{
-	// •Ï”éŒ¾
+int main(int argc, char *argv[]) {
+	// å¤‰æ•°å®£è¨€
 	Mat im;
-	// ƒJƒƒ‰‚ÌƒLƒƒƒvƒ`ƒƒ
+	// ã‚«ãƒ¡ãƒ©ã®ã‚­ãƒ£ãƒ—ãƒãƒ£
 	VideoCapture cap(0);
-	// ƒLƒƒƒvƒ`ƒƒ‚ÌƒGƒ‰[ˆ—
+	// ã‚­ãƒ£ãƒ—ãƒãƒ£ã®ã‚¨ãƒ©ãƒ¼å‡¦ç†
 	if (!cap.isOpened()) return -1;
 
 	while (1) {
-		// ƒJƒƒ‰‰f‘œ‚Ìæ“¾
-		cap >> im;
-		// ‰f‘œ‚Ì•\¦
-		imshow("Camera", im);
-		// ƒL[“ü—Í‚ª‚ ‚ê‚ÎI—¹
+		// ã‚«ãƒ¡ãƒ©æ˜ åƒã®å–å¾—
+		cap >> img;
+		// æ˜ åƒã®è¡¨ç¤º
+		namedWindow("Camera", CV_WINDOW_AUTOSIZE | CV_WINDOW_FREERATIO);
+		imshow("Camera", img);
+		// ã‚­ãƒ¼å…¥åŠ›ãŒã‚ã‚Œã°çµ‚äº†
 		if (waitKey(30) >= 0) break;
 	}
 	return 0;

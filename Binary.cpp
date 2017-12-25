@@ -1,19 +1,28 @@
-#include "opencv2/opencv.hpp"
+#include <opencv2/opencv.hpp>
 
 using namespace cv;
 
 int main(int argc, char* argv[]) {
 
 	Mat img = imread("input.jpg");
+	if (img.empty()) return -1;
 	Mat gray_img;
-	Mat element = Mat::ones(3, 3, CV_8UC1); //3~3‚Ìs—ñ‚Å—v‘f‚Í‚·‚×‚Ä1
-	cvtColor(img, gray_img, CV_BGR2GRAY);	//ƒOƒŒ[ƒXƒP[ƒ‹‰»
+	//3Ã—3ã®è¡Œåˆ—ã§è¦ç´ ã¯ã™ã¹ã¦1
+	Mat element = Mat::ones(3, 3, CV_8UC1);
+	
+	//ã‚°ãƒ¬ãƒ¼ã‚¹ã‚±ãƒ¼ãƒ«åŒ–
+	cvtColor(img, gray_img, CV_BGR2GRAY);
 
 	Mat bin_img;
-	threshold(gray_img, bin_img, 127, 255, THRESH_BINARY);	//è‡’lİ’è
-	//bin_img = ~bin_img; //”½“]
-	dilate(bin_img, bin_img, element, Point(-1, -1), 0);	//ÅŒã‚Ìˆø”‚Å–c’£ˆ—‰ñ”‚ğİ’è
+	//é–¾å€¤è¨­å®š
+	threshold(gray_img, bin_img, 127, 255, THRESH_BINARY);
 
+	//bin_img = ~bin_img; //åè»¢
+	
+	//æœ€å¾Œã®å¼•æ•°ã§è†¨å¼µå‡¦ç†å›æ•°ã‚’è¨­å®š
+	dilate(bin_img, bin_img, element, Point(-1, -1), 0);
+	//ç”»åƒè¡¨ç¤º
+	namedWindow("result", CV_WINDOW_AUTOSIZE | CV_WINDOW_FREERATIO);
 	imshow("result", bin_img);
 
 	waitKey(0);

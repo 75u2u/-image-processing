@@ -1,12 +1,15 @@
-#include "opencv2/opencv.hpp"
+#include <opencv2/opencv.hpp>
 
 using namespace cv;
 
-int main(void)
-{
-	Mat im = imread("csharptan.png");    // 画像の取得
-	blur(im, im, Size(3, 3));        // ぼかしフィルタ
-	imshow("Show image", im);	    // 画像の表示
-	waitKey(0);                     // 入力待機
+int main(int argc, char* argv[]) {
+	Mat img = imread("input.jpg");
+	
+	blur(img, img, Size(3, 3));
+	
+	namedWindow("result", CV_WINDOW_AUTOSIZE | CV_WINDOW_FREERATIO);
+	imshow("result", img);
+	
+	waitKey(0);
 	return 0;
 }

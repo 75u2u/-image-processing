@@ -5,7 +5,7 @@ using namespace cv;
 
 int main(int argc, char *argv[]) {
 	// 変数宣言
-	Mat im;
+	Mat img;
 	// カメラのキャプチャ
 	VideoCapture cap(0);
 	// キャプチャのエラー処理
